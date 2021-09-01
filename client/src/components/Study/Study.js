@@ -2,7 +2,7 @@ import React from 'react';
 import './Study.css';
 
 const Study = () => {
-  return <div></div>;
+  return <div className="Study-content">not yet</div>;
 };
 
 export default Study;

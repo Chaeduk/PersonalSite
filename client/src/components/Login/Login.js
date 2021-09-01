@@ -1,8 +1,38 @@
 import React from 'react';
+import { Button, Form } from 'react-bootstrap';
 import './Login.css';
 
 const Login = () => {
-  return <div></div>;
+  return (
+    <div className="Login-content">
+      <div style={{ width: 400, margin: 15 }}>
+        <h1 style={{ textAlign: 'center', marginBottom: 10 }}>Login</h1>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicId">
+            <Form.Label>Id</Form.Label>
+            <Form.Control type="text" placeholder="Id" />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+
+          <div className="d-grid gap-2" style={{ marginTop: 27 }}>
+            <Button variant="outline-primary" type="submit">
+              LogIn
+            </Button>
+            <Button variant="primary" type="submit" style={{ marginTop: 5 }}>
+              SignUp
+            </Button>
+          </div>
+          {/* <Button variant="primary" type="submit">
+      Signup
+    </Button> */}
+        </Form>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
