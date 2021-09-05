@@ -26,9 +26,6 @@ const Login = () => {
               SignUp
             </Button>
           </div>
-          {/* <Button variant="primary" type="submit">
-      Signup
-    </Button> */}
         </Form>
       </div>
     </div>
