@@ -6,7 +6,7 @@ import Profile from './components/Profile/Profile';
 import Post from './components/Post/Post';
 import Contact from './components/Contact/Contact';
 import Study from './components/Study/Study';
-import Login from './components/Login/Login';
+import LoginContainer from './containers/LoginContainer';
 import SignupContainer from './containers/SignupContainer';
 import Write from './components/Write/Write';
 import Content from './components/Content/Content';
@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/post" component={Post} />
         <Route path="/contact" component={Contact} />
         <Route path="/study" component={Study} />
-        <Route path="/login" component={Login} />
+        <Route path="/login" component={LoginContainer} />
         <Route path="/signup" component={SignupContainer} />
         <Route path="/write" component={Write} />
         <Route path="/content" component={Content} />

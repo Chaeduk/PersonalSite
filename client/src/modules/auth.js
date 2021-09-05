@@ -23,11 +23,10 @@ const initalState = {
 
 const auth = handleActions(
   {
-    [CHANGE_INPUT]: (state, { payload: { form, data } }) => {
+    [CHANGE_INPUT]: (state, { payload: { form, data } }) =>
       produce(state, (draft) => {
         draft[form][data.name] = data.value;
-      });
-    },
+      }),
   },
   initalState,
 );

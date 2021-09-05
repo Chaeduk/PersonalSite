@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -22,7 +23,12 @@ const Login = () => {
             <Button variant="outline-primary" type="submit">
               LogIn
             </Button>
-            <Button variant="primary" type="submit" style={{ marginTop: 5 }}>
+            <Button
+              as={Link}
+              to="/signup"
+              variant="primary"
+              style={{ marginTop: 5 }}
+            >
               SignUp
             </Button>
           </div>
