@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Signup from '../components/Signup/Signup';
 import { connect } from 'react-redux';
-import { changeInput } from '../modules/auth';
+import { changeInput, initializeForm } from '../modules/auth';
 
 const SignupContainer = ({
   id,
@@ -9,6 +9,7 @@ const SignupContainer = ({
   password,
   passwordConfirm,
   changeInput,
+  initializeForm,
 }) => {
   const onChangeInput = (e) =>
     changeInput({ form: 'register', data: e.target });
@@ -17,6 +18,11 @@ const SignupContainer = ({
     e.preventDefault();
     console.log(id, nickname, password, passwordConfirm);
   };
+
+  useEffect(() => {
+    initializeForm('register');
+  }, [initializeForm]);
+
   return (
     <Signup
       id={id}
@@ -38,6 +44,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   changeInput,
+  initializeForm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
