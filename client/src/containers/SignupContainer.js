@@ -11,6 +11,7 @@ const SignupContainer = ({
   changeInput,
   initializeForm,
   doSignup,
+  history,
 }) => {
   const onChangeInput = (e) =>
     changeInput({ form: 'register', data: e.target });
@@ -18,7 +19,8 @@ const SignupContainer = ({
   const onSubmit = (e) => {
     e.preventDefault();
     // console.log(id, nickname, password, passwordConfirm);
-    doSignup({ id, nickname, password });
+    // doSignup({ id, nickname, password });
+    // history.push('/');
   };
 
   useEffect(() => {

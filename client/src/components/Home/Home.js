@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import './Home.css';
-import 'holderjs';
+import { run as runHolder } from 'holderjs/holder';
 
 const Home = () => {
+  useEffect(() => {
+    runHolder('image-class-name');
+  });
   return (
     <div className="Home-content">
       <div style={{ height: 450, width: 850, margin: 30 }}>
