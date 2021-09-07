@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const app = express();
 
-app.set("port", porcess.env.PORT || 4000);
+app.set("port", 4000);
 
 app.use(morgan("dev"));
 app.use(express.json());

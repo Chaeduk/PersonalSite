@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Signup from '../components/Signup/Signup';
 import { connect } from 'react-redux';
-import { changeInput, initializeForm } from '../modules/auth';
+import { changeInput, initializeForm, doSignup } from '../modules/auth';
 
 const SignupContainer = ({
   id,
@@ -10,13 +10,15 @@ const SignupContainer = ({
   passwordConfirm,
   changeInput,
   initializeForm,
+  doSignup,
 }) => {
   const onChangeInput = (e) =>
     changeInput({ form: 'register', data: e.target });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(id, nickname, password, passwordConfirm);
+    // console.log(id, nickname, password, passwordConfirm);
+    doSignup({ id, nickname, password });
   };
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const SignupContainer = ({
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, loading }) => ({
   id: auth.register.id,
   nickname: auth.register.nickname,
   password: auth.register.password,
@@ -45,6 +47,7 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = {
   changeInput,
   initializeForm,
+  doSignup,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
