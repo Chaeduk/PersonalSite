@@ -15,8 +15,9 @@ const SignupContainer = ({
   history,
   loading,
 }) => {
-  const onChangeInput = (e) =>
+  const onChangeInput = (e) => {
     changeInput({ form: 'register', data: e.target });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
