@@ -9,6 +9,7 @@ const Signup = ({
   passwordConfirm,
   onChangeInput,
   onSubmit,
+  onClick,
 }) => {
   return (
     <div className="Signup-content">
@@ -25,7 +26,9 @@ const Signup = ({
                 value={id}
                 onChange={onChangeInput}
               />
-              <Button variant="outline-secondary">Check</Button>
+              <Button variant="outline-secondary" onClick={onClick}>
+                Check
+              </Button>
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">

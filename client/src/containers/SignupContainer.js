@@ -8,24 +8,42 @@ const SignupContainer = ({
   nickname,
   password,
   passwordConfirm,
+  res,
   changeInput,
   initializeForm,
   doSignup,
   history,
+  loading,
 }) => {
   const onChangeInput = (e) =>
     changeInput({ form: 'register', data: e.target });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // console.log(id, nickname, password, passwordConfirm);
-    // doSignup({ id, nickname, password });
-    // history.push('/');
+    if (password !== passwordConfirm) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+    doSignup({ id, nickname, password });
+  };
+
+  const onClick = () => {
+    alert('중복확인이 완료되었습니다');
   };
 
   useEffect(() => {
     initializeForm('register');
   }, [initializeForm]);
+
+  useEffect(() => {
+    if (loading) {
+      if (res === 'hello') {
+        history.push('/login');
+      } else {
+        alert('nono');
+      }
+    }
+  });
 
   return (
     <Signup
@@ -35,6 +53,7 @@ const SignupContainer = ({
       passwordConfirm={passwordConfirm}
       onChangeInput={onChangeInput}
       onSubmit={onSubmit}
+      onClick={onClick}
     />
   );
 };
@@ -44,6 +63,8 @@ const mapStateToProps = ({ auth, loading }) => ({
   nickname: auth.register.nickname,
   password: auth.register.password,
   passwordConfirm: auth.register.passwordConfirm,
+  res: auth.res,
+  loading: loading['auth/DO_SIGNUP'],
 });
 
 const mapDispatchToProps = {

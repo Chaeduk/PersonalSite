@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post("/signup", function (req, res) {
   console.log(req.body);
-  res.send("hello");
+  res.send("hellod");
 });
 
 module.exports = router;
