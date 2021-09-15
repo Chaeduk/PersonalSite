@@ -1,10 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
-const authRouter = require("./routes/auth");
-
 require("dotenv").config();
+const authRouter = require("./routes/auth");
+const connect = require("./schemas");
 
 const app = express();
+connect();
 
 app.set("port", 4000);
 
