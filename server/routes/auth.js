@@ -45,7 +45,12 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/doublecheck", async (req, res) => {
-  const state = await doublecheck(req.body.id);
+  const { id } = req.body;
+  if (!/^[a-zA-Z0-9]{6,12}$/.test(id)) {
+    res.send("아이디를 대문자,소문자,숫자 6~12글자 형식으로 작성해주세요");
+    return;
+  }
+  const state = await doublecheck(id);
   if (state === true) {
     res.send("사용가능합니다!");
   } else {

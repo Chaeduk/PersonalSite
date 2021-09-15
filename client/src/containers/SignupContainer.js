@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import Signup from '../components/Signup/Signup';
 import { connect } from 'react-redux';
-import { changeInput, initializeForm, doSignup } from '../modules/auth';
+import {
+  changeInput,
+  initializeForm,
+  doSignup,
+  doDoublecheck,
+} from '../modules/auth';
 
 const SignupContainer = ({
   id,
@@ -12,8 +17,10 @@ const SignupContainer = ({
   changeInput,
   initializeForm,
   doSignup,
+  doDoublecheck,
   history,
-  loading,
+  loadingSignup,
+  loadingDoublecheck,
 }) => {
   const onChangeInput = (e) => {
     changeInput({ form: 'register', data: e.target });
@@ -32,7 +39,11 @@ const SignupContainer = ({
   };
 
   const onClick = () => {
-    alert('중복확인이 완료되었습니다');
+    if (id === '') {
+      alert('아이디를 입력해주세요.');
+    } else {
+      doDoublecheck(id);
+    }
   };
 
   useEffect(() => {
@@ -40,8 +51,9 @@ const SignupContainer = ({
   }, [initializeForm]);
 
   useEffect(() => {
-    if (loading) {
+    if (loadingSignup || loadingDoublecheck) {
       if (res === 'success') {
+        alert('회원가입이 완료되었습니다!');
         history.push('/login');
         initializeForm('res');
       } else if (res !== '') {
@@ -70,13 +82,15 @@ const mapStateToProps = ({ auth, loading }) => ({
   password: auth.register.password,
   passwordConfirm: auth.register.passwordConfirm,
   res: auth.res,
-  loading: loading['auth/DO_SIGNUP'],
+  loadingSignup: loading['auth/DO_SIGNUP'],
+  loadingDoublecheck: loading['auth/DO_DOUBLECHECK'],
 });
 
 const mapDispatchToProps = {
   changeInput,
   initializeForm,
   doSignup,
+  doDoublecheck,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
