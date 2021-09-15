@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../schemas/user");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
@@ -31,10 +32,11 @@ router.post("/signup", async (req, res) => {
     return;
   }
   try {
+    const hash = await bcrypt.hash(password, 12);
     const new_user = new User({
       id: id,
       nickname: nickname,
-      password: password,
+      password: hash,
     });
     await new_user.save();
     res.send("success");

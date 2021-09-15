@@ -56,6 +56,7 @@ const SignupContainer = ({
         alert('회원가입이 완료되었습니다!');
         history.push('/login');
         initializeForm('res');
+        initializeForm('register');
       } else if (res !== '') {
         alert(res);
         initializeForm('res');
