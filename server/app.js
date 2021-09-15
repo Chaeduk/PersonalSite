@@ -15,6 +15,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRouter);
 
+app.use((err, req, res) => {
+  res.status(400).json({ message: error.message });
+});
+
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기 중");
 });

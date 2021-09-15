@@ -41,10 +41,12 @@ const SignupContainer = ({
 
   useEffect(() => {
     if (loading) {
-      if (res === 'hello') {
+      if (res === 'success') {
         history.push('/login');
-      } else {
-        alert('nono');
+        initializeForm('res');
+      } else if (res !== '') {
+        alert(res);
+        initializeForm('res');
       }
     }
   });
