@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ id, password, onChangeInput, onClick }) => {
   return (
     <div className="Login-content">
       <div style={{ width: 400, margin: 15 }}>
@@ -11,16 +11,28 @@ const Login = () => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicId">
             <Form.Label>Id</Form.Label>
-            <Form.Control type="text" placeholder="Id" />
+            <Form.Control
+              type="text"
+              placeholder="Id"
+              name="id"
+              value={id}
+              onChange={onChangeInput}
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={onChangeInput}
+            />
           </Form.Group>
 
           <div className="d-grid gap-2" style={{ marginTop: 27 }}>
-            <Button variant="outline-primary" type="submit">
+            <Button variant="outline-primary" onClick={onClick}>
               LogIn
             </Button>
             <Button

@@ -12,6 +12,9 @@ const DO_SIGNUP_SUCCESS = 'auth/DO_SIGNUP_SUCCESS';
 const DO_DOUBLECHECK = 'auth/DO_DOUBLECHECK';
 const DO_DOUBLECHECK_SUCCESS = 'auth/DO_DOUBLECHECK_SUCCESS';
 
+const DO_LOGIN = 'auth/DO_LOGIN';
+const DO_LOGIN_SUCCESS = 'auth/DO_LOGIN_SUCCESS';
+
 export const changeInput = createAction(CHANGE_INPUT, ({ form, data }) => ({
   form,
   data,
@@ -24,6 +27,7 @@ export const doDoublecheck = createRequestThunk(
   DO_DOUBLECHECK,
   api.doublecheck,
 );
+export const doLogin = createRequestThunk(DO_LOGIN, api.login);
 
 const initalState = {
   register: {
@@ -54,6 +58,10 @@ const auth = handleActions(
       res: res,
     }),
     [DO_DOUBLECHECK_SUCCESS]: (state, { payload: res }) => ({
+      ...state,
+      res: res,
+    }),
+    [DO_LOGIN_SUCCESS]: (state, { payload: res }) => ({
       ...state,
       res: res,
     }),

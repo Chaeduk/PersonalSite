@@ -60,4 +60,19 @@ router.post("/doublecheck", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  const { id, password } = req.body;
+  const user = await User.findOne({ id: id });
+  if (user === null) {
+    res.send("로그인에 실패하였습니다.");
+  } else {
+    const result = await bcrypt.compare(password, user.password);
+    if (!result) {
+      res.send("로그인에 실패하였습니다.");
+    } else {
+      res.send("로그인에 성공하였습니다.");
+    }
+  }
+});
+
 module.exports = router;
