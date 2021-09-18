@@ -37,7 +37,6 @@ userSchema.methods.generateAcessToken = async function () {
   const acessToken = await jwt.sign(
     {
       id: user.id,
-      nickname: user.nickname,
     },
     process.env.JWT_SECRET,
     {

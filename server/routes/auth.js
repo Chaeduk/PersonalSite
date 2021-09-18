@@ -64,12 +64,30 @@ router.post("/login", async (req, res) => {
   const { id, password } = req.body;
   const user = await User.findOne({ id: id });
   if (user === null) {
-    res.send("로그인에 실패하였습니다.");
+    return res.status(200).json({
+      loginSucess: false,
+      id: "",
+      nickname: "",
+      acessToken: "",
+      msg: "로그인에 실패하였습니다.",
+    });
   } else {
     const result = await bcrypt.compare(password, user.password);
     if (!result) {
-      res.send("로그인에 실패하였습니다.");
+      return res.status(200).json({
+        loginSucess: false,
+        id: "",
+        nickname: "",
+        acessToken: "",
+        msg: "로그인에 실패하였습니다.",
+      });
     } else {
+      if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")
+      ) {
+        console.log(req.headers.authorization.split(" ")[1]);
+      }
       const acessToken = await user.generateAcessToken();
       const refreshToken = await user.generateRefreshToken();
 
@@ -80,7 +98,13 @@ router.post("/login", async (req, res) => {
         maxAge: 1000 * 60 * 60 * 24 * 14,
       });
 
-      res.send("로그인에 성공하였습니다.");
+      return res.status(200).json({
+        loginSucess: true,
+        id: user.id,
+        nickname: user.nickname,
+        acessToken: acessToken,
+        msg: "로그인에 성공하였습니다.",
+      });
     }
   }
 });

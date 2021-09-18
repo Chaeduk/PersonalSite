@@ -1,7 +1,9 @@
 import { createAction, handleActions } from 'redux-actions';
+import { startLoading, finishLoading } from './loading';
 import produce from 'immer';
 import * as api from '../lib/api/auth';
 import createRequestThunk from '../lib/createRequestThunk';
+import client from '../lib/api/client';
 
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
@@ -14,6 +16,7 @@ const DO_DOUBLECHECK_SUCCESS = 'auth/DO_DOUBLECHECK_SUCCESS';
 
 const DO_LOGIN = 'auth/DO_LOGIN';
 const DO_LOGIN_SUCCESS = 'auth/DO_LOGIN_SUCCESS';
+const DO_LOGIN_FAILURE = 'auth/DO_LOGIN_FAILURE';
 
 export const changeInput = createAction(CHANGE_INPUT, ({ form, data }) => ({
   form,
@@ -27,7 +30,28 @@ export const doDoublecheck = createRequestThunk(
   DO_DOUBLECHECK,
   api.doublecheck,
 );
-export const doLogin = createRequestThunk(DO_LOGIN, api.login);
+export const doLogin = (params) => async (dispatch) => {
+  dispatch(startLoading(DO_LOGIN));
+  try {
+    const response = await api.login(params);
+    client.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${response.data.acessToken}`;
+    dispatch({
+      type: DO_LOGIN_SUCCESS,
+      payload: response.data,
+    });
+    dispatch(finishLoading(DO_LOGIN));
+  } catch (e) {
+    dispatch({
+      type: DO_LOGIN_FAILURE,
+      payload: e,
+      error: true,
+    });
+    dispatch(startLoading(DO_LOGIN));
+    throw e;
+  }
+};
 
 const initalState = {
   register: {
@@ -41,6 +65,10 @@ const initalState = {
     password: '',
   },
   res: '',
+  user: {
+    id: '',
+    nickname: '',
+  },
 };
 
 const auth = handleActions(
