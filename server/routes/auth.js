@@ -70,6 +70,16 @@ router.post("/login", async (req, res) => {
     if (!result) {
       res.send("로그인에 실패하였습니다.");
     } else {
+      const acessToken = await user.generateAcessToken();
+      const refreshToken = await user.generateRefreshToken();
+
+      res.cookie("R_AUTH", refreshToken, {
+        sameSite: "none",
+        httpOnly: true,
+        secure: true,
+        maxAge: 1000 * 60 * 60 * 24 * 14,
+      });
+
       res.send("로그인에 성공하였습니다.");
     }
   }
