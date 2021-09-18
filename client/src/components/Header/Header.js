@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import AuthNavContainer from '../../containers/AuthNavContainer';
 
 const Header = () => {
   return (
@@ -32,11 +33,12 @@ const Header = () => {
                 <NavDropdown.Item href="#logout">로그아웃</NavDropdown.Item>
               </NavDropdown>
             </Nav> */}
-            <Nav>
+            {/* <Nav>
               <Nav.Link as={Link} to="/login" className="mx-lg-3">
                 <b>Login</b>
               </Nav.Link>
-            </Nav>
+            </Nav> */}
+            <AuthNavContainer />
           </Navbar.Collapse>
         </Container>
       </Navbar>
