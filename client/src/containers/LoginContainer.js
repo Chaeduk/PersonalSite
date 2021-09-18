@@ -9,6 +9,10 @@ const LoginContainer = ({
   changeInput,
   initializeForm,
   doLogin,
+  loadingLogin,
+  loginSuccess,
+  res,
+  history,
 }) => {
   const onChangeInput = (e) => {
     changeInput({ form: 'login', data: e.target });
@@ -23,8 +27,29 @@ const LoginContainer = ({
   };
 
   useEffect(() => {
+    if (loginSuccess) {
+      initializeForm('login');
+      history.push('/');
+    }
+  }, [loginSuccess, history, initializeForm]);
+
+  useEffect(() => {
+    if (loginSuccess) {
+      alert('이미 로그인되어있습니다.');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     initializeForm('login');
   }, [initializeForm]);
+
+  useEffect(() => {
+    if (loadingLogin && res !== '') {
+      alert(res);
+      initializeForm('res');
+    }
+  });
 
   return (
     <Login
@@ -40,6 +65,8 @@ const mapStateToProps = ({ auth, loading }) => ({
   id: auth.login.id,
   password: auth.login.password,
   loadingLogin: loading['auth/DO_LOGIN'],
+  res: auth.res,
+  loginSuccess: auth.loginSuccess,
 });
 
 const mapDispatchToProps = {

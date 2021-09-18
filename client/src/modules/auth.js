@@ -65,6 +65,7 @@ const initalState = {
     password: '',
   },
   res: '',
+  loginSuccess: false,
   user: {
     id: '',
     nickname: '',
@@ -89,9 +90,14 @@ const auth = handleActions(
       ...state,
       res: res,
     }),
-    [DO_LOGIN_SUCCESS]: (state, { payload: res }) => ({
+    [DO_LOGIN_SUCCESS]: (
+      state,
+      { payload: { loginSuccess, id, nickname, msg } },
+    ) => ({
       ...state,
-      res: res,
+      res: msg,
+      user: { id, nickname },
+      loginSuccess: loginSuccess,
     }),
   },
   initalState,

@@ -21,6 +21,7 @@ const SignupContainer = ({
   history,
   loadingSignup,
   loadingDoublecheck,
+  loginSuccess,
 }) => {
   const onChangeInput = (e) => {
     changeInput({ form: 'register', data: e.target });
@@ -45,6 +46,13 @@ const SignupContainer = ({
       doDoublecheck(id);
     }
   };
+
+  useEffect(() => {
+    if (loginSuccess) {
+      alert('이미 로그인되어있습니다.');
+      history.push('/');
+    }
+  }, [loginSuccess, history]);
 
   useEffect(() => {
     initializeForm('register');
@@ -85,6 +93,7 @@ const mapStateToProps = ({ auth, loading }) => ({
   res: auth.res,
   loadingSignup: loading['auth/DO_SIGNUP'],
   loadingDoublecheck: loading['auth/DO_DOUBLECHECK'],
+  loginSuccess: auth.loginSuccess,
 });
 
 const mapDispatchToProps = {

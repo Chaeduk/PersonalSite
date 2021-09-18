@@ -99,7 +99,7 @@ router.post("/login", async (req, res) => {
       });
 
       return res.status(200).json({
-        loginSucess: true,
+        loginSuccess: true,
         id: user.id,
         nickname: user.nickname,
         acessToken: acessToken,
