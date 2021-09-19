@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Post from '../components/Post/Post';
+import { connect } from 'react-redux';
 
 const PostContainer = ({ history, loginSuccess }) => {
   const onClick = () => {
@@ -10,6 +10,7 @@ const PostContainer = ({ history, loginSuccess }) => {
       alert('로그인이 필요한 서비스입니다!');
     }
   };
+
   return <Post onClick={onClick} />;
 };
 

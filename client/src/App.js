@@ -8,8 +8,8 @@ import Contact from './components/Contact/Contact';
 import Study from './components/Study/Study';
 import LoginContainer from './containers/LoginContainer';
 import SignupContainer from './containers/SignupContainer';
-import Write from './components/Write/Write';
 import Content from './components/Content/Content';
+import WriteContainer from './containers/WriteContainer';
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/study" component={Study} />
         <Route path="/login" component={LoginContainer} />
         <Route path="/signup" component={SignupContainer} />
-        <Route path="/write" component={Write} />
+        <Route path="/write" component={WriteContainer} />
         <Route path="/content" component={Content} />
       </Switch>
     </Layout>
