@@ -23,7 +23,7 @@ const AuthNavContainer = ({
 
   useEffect(() => {
     if (loadingLogout && !loginSuccess) {
-      alert('로그아웃이 완료되었습니다!');
+      alert('로그아웃이 되었습니다.');
       history.push('/');
     }
   });

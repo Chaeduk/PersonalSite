@@ -10,6 +10,9 @@ export const login = ({ id, password }) =>
 
 export const logout = () => client.post('/api/auth/logout');
 
+export const write = ({ title, content }) =>
+  client.post('/api/post/write', { title, content });
+
 export const resetToken = () => {
   client.defaults.headers.common['Authorization'] = '';
 };

@@ -18,6 +18,10 @@ const userSchema = new Schema({
   },
 });
 
+userSchema.statics.findById = async function (id) {
+  return await User.findOne({ id: id });
+};
+
 userSchema.methods.generateRefreshToken = async function () {
   const user = this;
   const refreshToken = await jwt.sign(
@@ -46,4 +50,6 @@ userSchema.methods.generateAcessToken = async function () {
   return acessToken;
 };
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;

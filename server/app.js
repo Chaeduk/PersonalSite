@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const authRouter = require("./routes/auth");
+const postRouter = require("./routes/post");
 const connect = require("./schemas");
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use("/api/auth", authRouter);
+app.use("/api/post", postRouter);
 
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기 중");

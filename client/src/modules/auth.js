@@ -21,6 +21,9 @@ const DO_LOGOUT = 'auth/DO_LOGOUT';
 const DO_LOGOUT_SUCCESS = 'auth/DO_LOGOUT_SUCCESS';
 const DO_LOGOUT_FAILURE = 'auth/DO_LOGOUT_FAILURE';
 
+const DO_WRITE = 'auth/DO_WRITE';
+const DO_WRITE_SUCCESS = 'auth/DO_WRITE_SUCCESS';
+
 export const changeInput = createAction(CHANGE_INPUT, ({ form, data }) => ({
   form,
   data,
@@ -57,7 +60,6 @@ export const doLogout = () => async (dispatch) => {
   dispatch(startLoading(DO_LOGOUT));
   try {
     await api.logout();
-    api.resetToken();
     dispatch({
       type: DO_LOGOUT_SUCCESS,
     });
@@ -72,6 +74,8 @@ export const doLogout = () => async (dispatch) => {
     throw e;
   }
 };
+
+export const doWrite = createRequestThunk(DO_WRITE, api.write);
 
 const initalState = {
   register: {
@@ -126,6 +130,11 @@ const auth = handleActions(
       loginSuccess: false,
       user: { id: '', nickname: '' },
       accessToken: '',
+    }),
+    [DO_WRITE_SUCCESS]: (state, { payload: { res, accessToken } }) => ({
+      ...state,
+      accessToken: accessToken,
+      res: res,
     }),
   },
   initalState,
