@@ -2,14 +2,14 @@ import React from 'react';
 import { Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const AuthNav = ({ loginSuccess, user }) => {
+const AuthNav = ({ loginSuccess, user, onClick }) => {
   if (loginSuccess) {
     return (
       <Nav className="mx-lg-3">
         <NavDropdown title={user.nickname} id="collasible-nav-dropdown">
           <NavDropdown.Item href="#info">내정보</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#logout">로그아웃</NavDropdown.Item>
+          <NavDropdown.Item onClick={onClick}>로그아웃</NavDropdown.Item>
         </NavDropdown>
       </Nav>
     );

@@ -109,4 +109,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/logout", (req, res) => {
+  res.clearCookie("R_AUTH");
+  res.status(204).json();
+});
+
 module.exports = router;

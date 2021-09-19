@@ -18,6 +18,10 @@ const DO_LOGIN = 'auth/DO_LOGIN';
 const DO_LOGIN_SUCCESS = 'auth/DO_LOGIN_SUCCESS';
 const DO_LOGIN_FAILURE = 'auth/DO_LOGIN_FAILURE';
 
+const DO_LOGOUT = 'auth/DO_LOGOUT';
+const DO_LOGOUT_SUCCESS = 'auth/DO_LOGOUT_SUCCESS';
+const DO_LOGOUT_FAILURE = 'auth/DO_LOGOUT_FAILURE';
+
 export const changeInput = createAction(CHANGE_INPUT, ({ form, data }) => ({
   form,
   data,
@@ -49,6 +53,26 @@ export const doLogin = (params) => async (dispatch) => {
       error: true,
     });
     dispatch(startLoading(DO_LOGIN));
+    throw e;
+  }
+};
+
+export const doLogout = () => async (dispatch) => {
+  dispatch(startLoading(DO_LOGOUT));
+  try {
+    await api.logout();
+    api.resetToken();
+    dispatch({
+      type: DO_LOGOUT_SUCCESS,
+    });
+    dispatch(finishLoading(DO_LOGOUT));
+  } catch (e) {
+    dispatch({
+      type: DO_LOGOUT_FAILURE,
+      payload: e,
+      error: true,
+    });
+    dispatch(startLoading(DO_LOGOUT));
     throw e;
   }
 };
@@ -98,6 +122,11 @@ const auth = handleActions(
       res: msg,
       user: { id, nickname },
       loginSuccess: loginSuccess,
+    }),
+    [DO_LOGOUT_SUCCESS]: (state) => ({
+      ...state,
+      loginSuccess: false,
+      user: { id: '', nickname: '' },
     }),
   },
   initalState,
