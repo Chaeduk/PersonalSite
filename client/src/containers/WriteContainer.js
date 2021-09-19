@@ -22,11 +22,20 @@ const WriteContainer = ({
     }
   });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   const onChangeInput = (e) => {
     changeInput({ form: 'write', data: e.target });
   };
   return (
-    <Write title={title} content={content} onChangeInput={onChangeInput} />
+    <Write
+      title={title}
+      content={content}
+      onChangeInput={onChangeInput}
+      onSubmit={onSubmit}
+    />
   );
 };
 

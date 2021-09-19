@@ -3,7 +3,6 @@ import { startLoading, finishLoading } from './loading';
 import produce from 'immer';
 import * as api from '../lib/api/auth';
 import createRequestThunk from '../lib/createRequestThunk';
-import client from '../lib/api/client';
 
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
@@ -38,9 +37,6 @@ export const doLogin = (params) => async (dispatch) => {
   dispatch(startLoading(DO_LOGIN));
   try {
     const response = await api.login(params);
-    client.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${response.data.acessToken}`;
     dispatch({
       type: DO_LOGIN_SUCCESS,
       payload: response.data,
@@ -94,6 +90,7 @@ const initalState = {
     id: '',
     nickname: '',
   },
+  accessToken: '',
 };
 
 const auth = handleActions(
@@ -116,17 +113,19 @@ const auth = handleActions(
     }),
     [DO_LOGIN_SUCCESS]: (
       state,
-      { payload: { loginSuccess, id, nickname, msg } },
+      { payload: { loginSuccess, id, nickname, msg, accessToken } },
     ) => ({
       ...state,
       res: msg,
       user: { id, nickname },
       loginSuccess: loginSuccess,
+      accessToken: accessToken,
     }),
     [DO_LOGOUT_SUCCESS]: (state) => ({
       ...state,
       loginSuccess: false,
       user: { id: '', nickname: '' },
+      accessToken: '',
     }),
   },
   initalState,

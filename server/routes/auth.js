@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
       loginSucess: false,
       id: "",
       nickname: "",
-      acessToken: "",
+      accessToken: "",
       msg: "로그인에 실패하였습니다.",
     });
   } else {
@@ -78,16 +78,10 @@ router.post("/login", async (req, res) => {
         loginSucess: false,
         id: "",
         nickname: "",
-        acessToken: "",
+        accessToken: "",
         msg: "로그인에 실패하였습니다.",
       });
     } else {
-      if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith("Bearer")
-      ) {
-        console.log(req.headers.authorization.split(" ")[1]);
-      }
       const acessToken = await user.generateAcessToken();
       const refreshToken = await user.generateRefreshToken();
 
@@ -102,7 +96,7 @@ router.post("/login", async (req, res) => {
         loginSuccess: true,
         id: user.id,
         nickname: user.nickname,
-        acessToken: acessToken,
+        accessToken: acessToken,
         msg: "로그인에 성공하였습니다.",
       });
     }
@@ -110,6 +104,12 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    console.log(req.headers.authorization.split(" ")[1]);
+  }
   res.clearCookie("R_AUTH");
   res.status(204).json();
 });

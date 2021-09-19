@@ -2,11 +2,11 @@ import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import './Write.css';
 
-const Write = ({ title, content, onChangeInput }) => {
+const Write = ({ title, content, onChangeInput, onSubmit }) => {
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 15 }}>Write</h1>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Title</Form.Label>
           <Form.Control
