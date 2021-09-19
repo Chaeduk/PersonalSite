@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
-import Post from './components/Post/Post';
+import PostContainer from './containers/PostContainer';
 import Contact from './components/Contact/Contact';
 import Study from './components/Study/Study';
 import LoginContainer from './containers/LoginContainer';
@@ -17,7 +17,7 @@ const App = () => {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/profile" component={Profile} />
-        <Route path="/post" component={Post} />
+        <Route path="/post" component={PostContainer} />
         <Route path="/contact" component={Contact} />
         <Route path="/study" component={Study} />
         <Route path="/login" component={LoginContainer} />

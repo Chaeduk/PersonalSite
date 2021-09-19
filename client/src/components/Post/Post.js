@@ -2,12 +2,12 @@ import React from 'react';
 import { Button, Container, Pagination, Table } from 'react-bootstrap';
 import './Post.css';
 
-const Post = () => {
+const Post = ({ onClick }) => {
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 15 }}>Post</h1>
       <div style={{ textAlign: 'right' }}>
-        <Button style={{ marginBottom: 7 }} variant="dark">
+        <Button style={{ marginBottom: 7 }} variant="dark" onClick={onClick}>
           write
         </Button>
       </div>
