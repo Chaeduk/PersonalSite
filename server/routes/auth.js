@@ -104,12 +104,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    console.log(req.headers.authorization.split(" ")[1]);
-  }
   res.clearCookie("R_AUTH");
   res.status(204).json();
 });

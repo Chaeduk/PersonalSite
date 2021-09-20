@@ -12,7 +12,7 @@ exports.getUserIdByAcessToken = async (req, res, next) => {
 
       const user = await User.findById(decodeUser.id);
       if (user) {
-        req.userId = user.id;
+        req.userId = user._id;
         req.accessToken = token;
 
         next();
@@ -24,7 +24,7 @@ exports.getUserIdByAcessToken = async (req, res, next) => {
           const user = await User.findId(decodeUser.id);
           if (user) {
             const accessToken = await User.generateAcessToken();
-            req.userId = user.id;
+            req.userId = user._id;
             req.accessToken = accessToken;
             next();
           }

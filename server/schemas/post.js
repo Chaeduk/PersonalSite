@@ -18,9 +18,6 @@ const postSchema = new Schema({
     required: true,
     ref: "User",
   },
-  no: {
-    type: Number,
-  },
   views: {
     type: Number,
   },
