@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist';
 import auth from './auth';
 import loading from './loading';
 import post from './post';
+import page from './page';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   auth,
   loading,
   post,
+  page,
 });
 
 export default persistReducer(persistConfig, rootReducer);

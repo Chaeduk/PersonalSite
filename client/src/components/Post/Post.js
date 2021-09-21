@@ -2,7 +2,19 @@ import React from 'react';
 import { Button, Container, Pagination, Table } from 'react-bootstrap';
 import './Post.css';
 
-const Post = ({ onClick }) => {
+const Post = ({
+  onClick,
+  currentPosts,
+  pageNumbers,
+  paginate,
+  currentPage,
+  currentPaging,
+  maxPagelength,
+  nextPaging,
+  beforePaging,
+  firstPaging,
+  lastPaging,
+}) => {
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 15 }}>Post</h1>
@@ -22,82 +34,49 @@ const Post = ({ onClick }) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>Kim</td>
-              <td>20</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>Hello</td>
-              <td>Lee</td>
-              <td>5</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>Jack</td>
-              <td>10</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>Hem</td>
-              <td>30</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>choi</td>
-              <td>100</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>James</td>
-              <td>6</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>Rachel</td>
-              <td>77</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>Jack</td>
-              <td>60</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>Bob</td>
-              <td>4</td>
-              <td>2021-09-02</td>
-            </tr>
-            <tr>
-              <td>가입 인사입니다.</td>
-              <td>park</td>
-              <td>1</td>
-              <td>2021-09-02</td>
-            </tr>
+            {currentPosts.map((post, index) => (
+              <tr key={index}>
+                <td>{post.title}</td>
+                <td>{post.nickname}</td>
+                <td>{post.views}</td>
+                <td>{post.date}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>
 
       <div className="Post-Pagination">
         <Pagination style={{ marginTop: 2 }}>
-          <Pagination.First />
-          <Pagination.Ellipsis />
-
-          <Pagination.Item active>{1}</Pagination.Item>
-          <Pagination.Item>{2}</Pagination.Item>
-          <Pagination.Item>{3}</Pagination.Item>
-          <Pagination.Item>{4}</Pagination.Item>
-          <Pagination.Item>{5}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Last />
+          <Pagination.First
+            disabled={currentPage === 1 ? true : false}
+            onClick={firstPaging}
+          />
+          <Pagination.Ellipsis
+            disabled={currentPaging === 1 ? true : false}
+            onClick={() => {
+              beforePaging();
+            }}
+          />
+          {pageNumbers[currentPaging - 1].map((page, index) => (
+            <Pagination.Item
+              key={index}
+              onClick={() => paginate(page)}
+              active={currentPage === page ? true : false}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+          <Pagination.Ellipsis
+            disabled={currentPaging === pageNumbers.length ? true : false}
+            onClick={() => {
+              nextPaging();
+            }}
+          />
+          <Pagination.Last
+            disabled={currentPage === maxPagelength ? true : false}
+            onClick={lastPaging}
+          />
         </Pagination>
       </div>
     </Container>

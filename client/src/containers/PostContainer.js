@@ -1,8 +1,25 @@
 import React from 'react';
 import Post from '../components/Post/Post';
 import { connect } from 'react-redux';
+import {
+  convertPage,
+  beforePaging,
+  nextPaging,
+  setPaging,
+} from '../modules/page';
 
-const PostContainer = ({ history, loginSuccess }) => {
+const PostContainer = ({
+  history,
+  loginSuccess,
+  currentPage,
+  maxPagelength,
+  currentPosts,
+  convertPage,
+  currentPaging,
+  beforePaging,
+  nextPaging,
+  setPaging,
+}) => {
   const onClick = () => {
     if (loginSuccess) {
       history.push('/write');
@@ -11,13 +28,58 @@ const PostContainer = ({ history, loginSuccess }) => {
     }
   };
 
-  return <Post onClick={onClick} />;
+  const n = [];
+  for (let i = 1; i <= maxPagelength; i++) {
+    n.push(i);
+  }
+  const pageNumbers = [];
+  for (let i = 0; i < maxPagelength; i += 5) {
+    pageNumbers.push(n.slice(i, i + 5));
+  }
+  const paginate = (n) => {
+    convertPage(n);
+  };
+
+  const lastPaging = () => {
+    convertPage(maxPagelength);
+    setPaging(pageNumbers.length);
+  };
+
+  const firstPaging = () => {
+    convertPage(1);
+    setPaging(1);
+  };
+
+  return (
+    <Post
+      onClick={onClick}
+      currentPosts={currentPosts}
+      pageNumbers={pageNumbers}
+      currentPage={currentPage}
+      paginate={paginate}
+      currentPaging={currentPaging}
+      maxPagelength={maxPagelength}
+      nextPaging={nextPaging}
+      beforePaging={beforePaging}
+      firstPaging={firstPaging}
+      lastPaging={lastPaging}
+    />
+  );
 };
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, page }) => ({
   loginSuccess: auth.loginSuccess,
+  currentPage: page.currentPage,
+  maxPagelength: page.maxPagelength,
+  currentPosts: page.currentPosts,
+  currentPaging: page.currentPaging,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  convertPage,
+  beforePaging,
+  nextPaging,
+  setPaging,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);
