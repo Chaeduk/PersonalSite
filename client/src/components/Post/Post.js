@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Pagination, Table } from 'react-bootstrap';
 import './Post.css';
+import moment from 'moment';
 
 const Post = ({
   onClick,
@@ -37,9 +38,9 @@ const Post = ({
             {currentPosts.map((post, index) => (
               <tr key={index}>
                 <td>{post.title}</td>
-                <td>{post.nickname}</td>
+                <td>{post.writer.nickname}</td>
                 <td>{post.views}</td>
-                <td>{post.date}</td>
+                <td>{moment(post.createdAt).format('YYYY-MM-DD')}</td>
               </tr>
             ))}
           </tbody>

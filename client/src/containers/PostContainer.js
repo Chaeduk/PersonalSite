@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Post from '../components/Post/Post';
 import { connect } from 'react-redux';
 import {
@@ -6,6 +6,7 @@ import {
   beforePaging,
   nextPaging,
   setPaging,
+  getPosts,
 } from '../modules/page';
 
 const PostContainer = ({
@@ -19,6 +20,7 @@ const PostContainer = ({
   beforePaging,
   nextPaging,
   setPaging,
+  getPosts,
 }) => {
   const onClick = () => {
     if (loginSuccess) {
@@ -27,6 +29,10 @@ const PostContainer = ({
       alert('로그인이 필요한 서비스입니다!');
     }
   };
+
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
 
   const n = [];
   for (let i = 1; i <= maxPagelength; i++) {
@@ -80,6 +86,7 @@ const mapDispatchToProps = {
   beforePaging,
   nextPaging,
   setPaging,
+  getPosts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);
