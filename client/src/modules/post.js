@@ -42,9 +42,11 @@ const post = handleActions(
     }),
     [GET_CONTENT_SUCCESS]: (state, { payload: { content } }) =>
       produce(state, (draft) => {
-        draft.content.title = content.title;
-        draft.content.content = content.content;
-        draft.content.nickname = content.nickname;
+        draft.content = {
+          title: content.title,
+          content: content.content,
+          nickname: content.writer.nickname,
+        };
       }),
   },
   initialState,

@@ -39,7 +39,7 @@ const Post = ({
             {currentPosts.map((post, index) => (
               <tr key={index}>
                 <td>
-                  <Link to="/content" style={{ color: 'gray' }}>
+                  <Link to={`/content/${post._id}`} style={{ color: 'gray' }}>
                     {post.title}
                   </Link>
                 </td>
