@@ -26,18 +26,6 @@ const Header = () => {
                 Study
               </Nav.Link>
             </Nav>
-            {/* <Nav className="mx-lg-3">
-              <NavDropdown title="Info" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#info">내정보</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#logout">로그아웃</NavDropdown.Item>
-              </NavDropdown>
-            </Nav> */}
-            {/* <Nav>
-              <Nav.Link as={Link} to="/login" className="mx-lg-3">
-                <b>Login</b>
-              </Nav.Link>
-            </Nav> */}
             <AuthNavContainer />
           </Navbar.Collapse>
         </Container>

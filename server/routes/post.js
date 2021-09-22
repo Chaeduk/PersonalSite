@@ -16,7 +16,6 @@ router.post("/write", getUserIdByAcessToken, async (req, res) => {
     writer: userId,
     views: 0,
   });
-  // console.log(moment(post.createdAt).format("YYYY-MM-DD"));
   res.status(200).json({
     res: "success",
     accessToken: accessToken,
@@ -29,5 +28,7 @@ router.get("/", async (req, res) => {
     posts: posts,
   });
 });
+
+router.get("/content/:id", async (req, res) => {});
 
 module.exports = router;

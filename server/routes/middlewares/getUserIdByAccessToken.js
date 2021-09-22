@@ -20,10 +20,13 @@ exports.getUserIdByAcessToken = async (req, res, next) => {
     } catch (e) {
       if (e.name == "TokenExpiredError") {
         try {
-          const decodeUser = await jwt.verify(req.cookies.R_AUTH);
-          const user = await User.findId(decodeUser.id);
+          const decodeUser = await jwt.verify(
+            req.cookies.R_AUTH,
+            process.env.JWT_SECRET
+          );
+          const user = await User.findById(decodeUser.id);
           if (user) {
-            const accessToken = await User.generateAcessToken();
+            const accessToken = await user.generateAcessToken();
             req.userId = user._id;
             req.accessToken = accessToken;
             next();

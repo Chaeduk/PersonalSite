@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Pagination, Table } from 'react-bootstrap';
 import './Post.css';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const Post = ({
   onClick,
@@ -37,7 +38,11 @@ const Post = ({
           <tbody>
             {currentPosts.map((post, index) => (
               <tr key={index}>
-                <td>{post.title}</td>
+                <td>
+                  <Link to="/content" style={{ color: 'gray' }}>
+                    {post.title}
+                  </Link>
+                </td>
                 <td>{post.writer.nickname}</td>
                 <td>{post.views}</td>
                 <td>{moment(post.createdAt).format('YYYY-MM-DD')}</td>

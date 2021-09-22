@@ -39,6 +39,8 @@ postSchema.statics.getPostings = async function () {
   return result;
 };
 
+postSchema.statics.getContent = async function () {};
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
