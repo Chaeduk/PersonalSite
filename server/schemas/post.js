@@ -40,7 +40,15 @@ postSchema.statics.getPostings = async function () {
   return result;
 };
 
-postSchema.statics.getContent = async function () {};
+postSchema.statics.getContent = async function (id) {
+  const post = await Post.findOneAndUpdate({ _id: id }, { $inc: { views: 1 } })
+    .populate({
+      path: "writer",
+      select: "nickname -_id",
+    })
+    .select("title content writer -_id");
+  return post;
+};
 
 const Post = mongoose.model("Post", postSchema);
 

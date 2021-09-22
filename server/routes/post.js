@@ -29,6 +29,11 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/content/:id", async (req, res) => {});
+router.get("/content/:id", async (req, res) => {
+  const post = await Post.getContent(req.params.id);
+  res.status(200).json({
+    content: post,
+  });
+});
 
 module.exports = router;

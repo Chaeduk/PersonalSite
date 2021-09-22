@@ -15,6 +15,8 @@ export const write = ({ title, content }) =>
 
 export const getPosts = () => client.get('/api/post');
 
+export const getContent = (id) => client.get(`/api/post/content/${id}`);
+
 export const resetToken = () => {
   client.defaults.headers.common['Authorization'] = '';
 };
