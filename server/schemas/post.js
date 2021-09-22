@@ -30,6 +30,7 @@ const postSchema = new Schema({
 
 postSchema.statics.getPostings = async function () {
   const posts = await Post.find()
+    .sort("-createdAt")
     .populate({ path: "writer", select: "nickname -_id" })
     .select("title writer  views createdAt ");
   const result = [];
