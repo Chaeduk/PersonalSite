@@ -44,7 +44,7 @@ userSchema.methods.generateAcessToken = async function () {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1m",
+      expiresIn: "1h",
     }
   );
   return acessToken;
