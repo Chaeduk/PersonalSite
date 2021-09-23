@@ -17,7 +17,7 @@ const Contact = () => {
             <Form.Control as="textarea" rows={3} />
           </Form.Group>
         </Form>
-        <Button className="mt-1" onClick={() => alert('제출되었습니다')}>
+        <Button className="mt-1" onClick={() => alert('준비중입니다')}>
           Submit
         </Button>
       </div>
