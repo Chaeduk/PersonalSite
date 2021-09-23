@@ -2,7 +2,14 @@ import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import './Write.css';
 
-const Write = ({ title, content, onChangeInput, onSubmit, onClick }) => {
+const Write = ({
+  title,
+  content,
+  onChangeInput,
+  onSubmit,
+  onClick,
+  onCancel,
+}) => {
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 15 }}>Write</h1>
@@ -30,7 +37,9 @@ const Write = ({ title, content, onChangeInput, onSubmit, onClick }) => {
       <Button style={{ marginRight: 8 }} variant="dark" onClick={onClick}>
         post
       </Button>
-      <Button variant="outline-dark">cancel</Button>
+      <Button variant="outline-dark" onClick={onCancel}>
+        cancel
+      </Button>
     </Container>
   );
 };

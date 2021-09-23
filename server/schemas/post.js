@@ -24,13 +24,13 @@ const postSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: moment().format("YYYY-MM-DD hh:mm:ss"),
+    default: Date.now,
   },
 });
 
 postSchema.statics.getPostings = async function () {
   const posts = await Post.find()
-    .sort("-createdAt")
+    .sort([["createdAt", -1]])
     .populate({ path: "writer", select: "nickname -_id" })
     .select("title writer  views createdAt ");
   const result = [];

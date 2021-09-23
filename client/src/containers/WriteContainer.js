@@ -48,7 +48,17 @@ const WriteContainer = ({
   };
 
   const onClick = () => {
-    doWrite({ title, content });
+    if (title === '' || content === '') {
+      alert('입력이 필요합니다!');
+    } else {
+      doWrite({ title, content });
+    }
+  };
+
+  const onCancel = () => {
+    initializeForm('res');
+    initializePost('write');
+    history.goBack();
   };
 
   const onChangeInput = (e) => {
@@ -61,6 +71,7 @@ const WriteContainer = ({
       onChangeInput={onChangeInput}
       onSubmit={onSubmit}
       onClick={onClick}
+      onCancel={onCancel}
     />
   );
 };
