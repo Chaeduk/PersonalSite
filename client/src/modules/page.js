@@ -49,8 +49,8 @@ const page = handleActions(
     [GET_POSTS_SUCCESS]: (state, { payload: { posts } }) =>
       produce(state, (draft) => {
         draft.posts = posts;
-        draft.currentPosts = posts.length >= 1 ? posts[0] : [];
-        draft.maxPagelength = posts.length;
+        draft.currentPosts = posts.length === 0 ? [] : posts[0];
+        draft.maxPagelength = posts.length === 0 ? 1 : posts.length;
       }),
   },
   initialState,
