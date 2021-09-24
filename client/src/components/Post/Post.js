@@ -17,7 +17,6 @@ const Post = ({
   firstPaging,
   lastPaging,
 }) => {
-  console.log(pageNumbers);
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 15 }}>Post</h1>
