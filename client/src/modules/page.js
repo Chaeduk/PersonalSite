@@ -29,7 +29,8 @@ const page = handleActions(
   {
     [CONVERT_PAGE]: (state, { payload: index }) =>
       produce(state, (draft) => {
-        draft.currentPosts = state.posts[index - 1];
+        draft.currentPosts =
+          state.posts.length === 0 ? [] : state.posts[index - 1];
         draft.currentPage = index;
       }),
     [BEFORE_PAGING]: (state) =>
