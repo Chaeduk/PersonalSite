@@ -3,6 +3,7 @@ const {
   getUserIdByAcessToken,
 } = require("../routes/middlewares/getUserIdByAccessToken");
 const Post = require("../schemas/post");
+const User = require("../schemas/user");
 
 const router = express.Router();
 
@@ -33,6 +34,14 @@ router.get("/content/:id", async (req, res) => {
   const post = await Post.getContent(req.params.id);
   res.status(200).json({
     content: post,
+  });
+});
+
+router.get("/myposts/:id", async (req, res) => {
+  const id = await User.findById(req.params.id);
+  const post = await Post.getMyPostings(id);
+  res.status(200).json({
+    posts: post,
   });
 });
 

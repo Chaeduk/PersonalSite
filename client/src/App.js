@@ -10,7 +10,7 @@ import LoginContainer from './containers/LoginContainer';
 import SignupContainer from './containers/SignupContainer';
 import WriteContainer from './containers/WriteContainer';
 import ContentContainer from './containers/ContentContainer';
-import Info from './components/Info/Info';
+import InfoContainer from './containers/InfoContainer';
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/signup" component={SignupContainer} />
         <Route path="/write" component={WriteContainer} />
         <Route path="/content/:id" component={ContentContainer} />
-        <Route path="/info" component={Info} />
+        <Route path="/info" component={InfoContainer} />
       </Switch>
     </Layout>
   );

@@ -50,6 +50,13 @@ postSchema.statics.getContent = async function (id) {
   return post;
 };
 
+postSchema.statics.getMyPostings = async function (id) {
+  const post = await Post.find({ writer: id })
+    .sort([["createdAt", -1]])
+    .select("title views createdAt");
+  return post;
+};
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

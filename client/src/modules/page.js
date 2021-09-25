@@ -11,18 +11,23 @@ const SET_PAGING = 'page/SET_PAGING';
 const GET_POSTS = 'page/GET_POSTS';
 const GET_POSTS_SUCCESS = 'page/GET_POSTS_SUCCESS';
 
+const GET_MY_POSTS = 'page/GET_MY_POSTS';
+const GET_MY_POSTS_SUCCESS = 'page/GET_MY_POSTS_SUCCESS';
+
 export const convertPage = createAction(CONVERT_PAGE);
 export const beforePaging = createAction(BEFORE_PAGING);
 export const nextPaging = createAction(NEXT_PAGING);
 export const setPaging = createAction(SET_PAGING);
 export const getPosts = createRequestThunk(GET_POSTS, api.getPosts);
-
+export const getMyPosts = createRequestThunk(GET_MY_POSTS, api.getMyPosts);
+//init 구현하기
 const initialState = {
   posts: [],
   currentPage: 1,
   currentPaging: 1,
   maxPagelength: 1,
   currentPosts: [],
+  myPosts: [],
 };
 
 const page = handleActions(
@@ -52,6 +57,10 @@ const page = handleActions(
         draft.posts = posts;
         draft.currentPosts = posts.length === 0 ? [] : posts[0];
         draft.maxPagelength = posts.length === 0 ? 1 : posts.length;
+      }),
+    [GET_MY_POSTS_SUCCESS]: (state, { payload: { posts } }) =>
+      produce(state, (draft) => {
+        draft.myPosts = posts;
       }),
   },
   initialState,
