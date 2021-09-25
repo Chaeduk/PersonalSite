@@ -3,6 +3,8 @@ import produce from 'immer';
 import * as api from '../lib/api/auth';
 import createRequestThunk from '../lib/createRequestThunk';
 
+const INITALIZE_PAGE = 'page/INITIALIZE_POST';
+
 const CONVERT_PAGE = 'page/CHANGE_PAGE';
 const BEFORE_PAGING = 'page/BEFORE_PAGING';
 const NEXT_PAGING = 'page/NEXT_PAGING';
@@ -14,13 +16,14 @@ const GET_POSTS_SUCCESS = 'page/GET_POSTS_SUCCESS';
 const GET_MY_POSTS = 'page/GET_MY_POSTS';
 const GET_MY_POSTS_SUCCESS = 'page/GET_MY_POSTS_SUCCESS';
 
+export const initalizePage = createAction(INITALIZE_PAGE, (form) => form);
 export const convertPage = createAction(CONVERT_PAGE);
 export const beforePaging = createAction(BEFORE_PAGING);
 export const nextPaging = createAction(NEXT_PAGING);
 export const setPaging = createAction(SET_PAGING);
 export const getPosts = createRequestThunk(GET_POSTS, api.getPosts);
 export const getMyPosts = createRequestThunk(GET_MY_POSTS, api.getMyPosts);
-//init 구현하기
+
 const initialState = {
   posts: [],
   currentPage: 1,
@@ -32,6 +35,10 @@ const initialState = {
 
 const page = handleActions(
   {
+    [INITALIZE_PAGE]: (state, { payload: form }) =>
+      produce(state, (draft) => {
+        draft[form] = initialState[form];
+      }),
     [CONVERT_PAGE]: (state, { payload: index }) =>
       produce(state, (draft) => {
         draft.currentPosts =

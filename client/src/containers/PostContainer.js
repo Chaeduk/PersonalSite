@@ -7,6 +7,7 @@ import {
   nextPaging,
   setPaging,
   getPosts,
+  initalizePage,
 } from '../modules/page';
 
 const PostContainer = ({
@@ -21,6 +22,7 @@ const PostContainer = ({
   nextPaging,
   setPaging,
   getPosts,
+  initalizePage,
 }) => {
   const onClick = () => {
     if (loginSuccess) {
@@ -31,8 +33,13 @@ const PostContainer = ({
   };
 
   useEffect(() => {
+    initalizePage('posts');
+    initalizePage('currentPage');
+    initalizePage('currentPaging');
+    initalizePage('maxPagelength');
+    initalizePage('currentPosts');
     getPosts();
-  }, [getPosts]);
+  }, [getPosts, initalizePage]);
 
   const n = [];
   for (let i = 1; i <= maxPagelength; i++) {
@@ -87,6 +94,7 @@ const mapDispatchToProps = {
   nextPaging,
   setPaging,
   getPosts,
+  initalizePage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

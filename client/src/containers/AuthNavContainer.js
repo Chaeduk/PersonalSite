@@ -4,6 +4,7 @@ import AuthNav from '../components/Header/AuthNav';
 import { doLogout } from '../modules/auth';
 import { useHistory } from 'react-router-dom';
 import client from '../lib/api/client';
+import { initalizePage } from '../modules/page';
 
 const AuthNavContainer = ({
   user,
@@ -11,6 +12,7 @@ const AuthNavContainer = ({
   loginSuccess,
   doLogout,
   accessToken,
+  initalizePage,
 }) => {
   const history = useHistory();
   const onClick = () => {
@@ -23,6 +25,7 @@ const AuthNavContainer = ({
 
   useEffect(() => {
     if (loadingLogout && !loginSuccess) {
+      initalizePage('myPosts');
       alert('로그아웃이 되었습니다.');
       history.push('/');
     }
@@ -38,6 +41,6 @@ const mapStateToProps = ({ auth, loading }) => ({
   accessToken: auth.accessToken,
 });
 
-const mapDispatchToProps = { doLogout };
+const mapDispatchToProps = { doLogout, initalizePage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthNavContainer);
