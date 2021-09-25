@@ -29,23 +29,25 @@ const Post = ({
         <Table className="table-Light" bordered hover>
           <thead>
             <tr>
-              <th>title</th>
-              <th>nickname</th>
-              <th>views</th>
-              <th>date</th>
+              <th className="title">title</th>
+              <th className="nickname">nickname</th>
+              <th className="views">views</th>
+              <th className="date">date</th>
             </tr>
           </thead>
           <tbody>
             {currentPosts.map((post, index) => (
               <tr key={index}>
-                <td>
+                <td className="title">
                   <Link to={`/content/${post._id}`} style={{ color: 'gray' }}>
                     {post.title}
                   </Link>
                 </td>
-                <td>{post.writer.nickname}</td>
-                <td>{post.views}</td>
-                <td>{moment(post.createdAt).format('YYYY-MM-DD')}</td>
+                <td className="nickname">{post.writer.nickname}</td>
+                <td className="views">{post.views}</td>
+                <td className="date">
+                  {moment(post.createdAt).format('YYYY-MM-DD')}
+                </td>
               </tr>
             ))}
           </tbody>

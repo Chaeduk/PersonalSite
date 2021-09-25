@@ -7,7 +7,9 @@ const AuthNav = ({ loginSuccess, user, onClick }) => {
     return (
       <Nav className="mx-lg-3">
         <NavDropdown title={user.nickname} id="collasible-nav-dropdown">
-          <NavDropdown.Item href="#info">내정보</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/info">
+            내정보
+          </NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={onClick}>로그아웃</NavDropdown.Item>
         </NavDropdown>
