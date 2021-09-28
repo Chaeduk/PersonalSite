@@ -57,6 +57,15 @@ postSchema.statics.getMyPostings = async function (id) {
   return post;
 };
 
+postSchema.statics.deletePosting = async function (userId, id) {
+  const post = await Post.find({ _id: id });
+  if (post.writer === userId) {
+    await Post.remove({ _id: id });
+    return true;
+  } else {
+    return false;
+  }
+};
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

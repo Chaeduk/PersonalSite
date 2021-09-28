@@ -48,12 +48,18 @@ router.get("/myposts/:id", async (req, res) => {
 router.delete("/:id", getUserIdByAcessToken, async (req, res) => {
   const userId = req.userId;
   const accessToken = req.accessToken;
-  //유저아이디와 물품 아이디 비교해 일치하는지 확인
-  await Post.remove({ _id: req.params.id });
-  res.status(200).json({
-    res: "success",
-    accessToken: accessToken,
-  });
+  const result = await Post.deletePosting(userId, req.params.id);
+  if (result === true) {
+    res.status(200).json({
+      res: "success",
+      accessToken: accessToken,
+    });
+  } else {
+    res.status(200).json({
+      res: "fail",
+      accessToken: "",
+    });
+  }
 });
 
 module.exports = router;
