@@ -45,7 +45,7 @@ router.get("/myposts/:id", async (req, res) => {
   });
 });
 
-router.delete("/:id", getUserIdByAcessToken, async (req, res) => {
+router.delete("/delete/:id", getUserIdByAcessToken, async (req, res) => {
   const userId = req.userId;
   const accessToken = req.accessToken;
   const result = await Post.deletePosting(userId, req.params.id);

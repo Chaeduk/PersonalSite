@@ -3,7 +3,7 @@ import { Button, Container, Table } from 'react-bootstrap';
 import './Info.css';
 import moment from 'moment';
 
-const Info = ({ myPosts }) => {
+const Info = ({ myPosts, doDeletePost }) => {
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 30 }}>My Post</h1>
@@ -33,8 +33,9 @@ const Info = ({ myPosts }) => {
                     style={{ margin: 5, width: 70 }}
                     variant="danger"
                     onClick={() => {
-                      const a = window.confirm('asdfdsf');
-                      console.log(a);
+                      // const a = window.confirm('asdfdsf');
+                      // console.log(a);
+                      doDeletePost(post._id);
                     }}
                   >
                     Delete

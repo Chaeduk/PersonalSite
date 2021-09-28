@@ -58,8 +58,8 @@ postSchema.statics.getMyPostings = async function (id) {
 };
 
 postSchema.statics.deletePosting = async function (userId, id) {
-  const post = await Post.find({ _id: id });
-  if (post.writer === userId) {
+  const post = await Post.findOne({ _id: id, writer: userId });
+  if (post) {
     await Post.remove({ _id: id });
     return true;
   } else {
