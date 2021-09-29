@@ -11,6 +11,7 @@ import SignupContainer from './containers/SignupContainer';
 import WriteContainer from './containers/WriteContainer';
 import ContentContainer from './containers/ContentContainer';
 import InfoContainer from './containers/InfoContainer';
+import EditContainer from './containers/EditContainer';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/signup" component={SignupContainer} />
         <Route path="/write" component={WriteContainer} />
         <Route path="/content/:id" component={ContentContainer} />
+        <Route path="/edit/:id" component={EditContainer} />
         <Route path="/info" component={InfoContainer} />
       </Switch>
     </Layout>

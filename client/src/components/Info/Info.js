@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
 import './Info.css';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-const Info = ({ myPosts, doDeletePost }) => {
+const Info = ({ myPosts, doDeletePost, doEditPost }) => {
   return (
     <Container style={{ marginTop: 55 }}>
       <h1 style={{ marginBottom: 30 }}>My Post</h1>
@@ -20,22 +21,33 @@ const Info = ({ myPosts, doDeletePost }) => {
           <tbody>
             {myPosts.map((post, index) => (
               <tr key={index}>
-                <td className="title">{post.title}</td>
+                <td className="title">
+                  <Link to={`/content/${post._id}`} style={{ color: 'gray' }}>
+                    {post.title}
+                  </Link>
+                </td>
                 <td className="views">{post.views}</td>
                 <td className="date">
                   {moment(post.createdAt).format('YYYY-MM-DD')}
                 </td>
                 <td className="act">
-                  <Button style={{ margin: 5, width: 70 }} variant="dark">
+                  <Button
+                    style={{ margin: 5, width: 70 }}
+                    variant="dark"
+                    onClick={() => {
+                      doEditPost(post._id);
+                    }}
+                  >
                     Edit
                   </Button>
                   <Button
                     style={{ margin: 5, width: 70 }}
                     variant="danger"
                     onClick={() => {
-                      // const a = window.confirm('asdfdsf');
-                      // console.log(a);
-                      doDeletePost(post._id);
+                      const answer = window.confirm('정말 삭제하시겠습니까?');
+                      if (answer) {
+                        doDeletePost(post._id);
+                      }
                     }}
                   >
                     Delete

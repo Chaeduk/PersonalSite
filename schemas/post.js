@@ -66,6 +66,19 @@ postSchema.statics.deletePosting = async function (userId, id) {
     return false;
   }
 };
+
+postSchema.statics.editPosting = async function (userId, id, title, content) {
+  const post = await Post.findOne({ _id: id, writer: userId });
+  if (post) {
+    post.title = title;
+    post.content = content;
+    await post.save();
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

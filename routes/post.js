@@ -45,6 +45,24 @@ router.get("/myposts/:id", async (req, res) => {
   });
 });
 
+router.patch("/edit/:id", getUserIdByAcessToken, async (req, res) => {
+  const userId = req.userId;
+  const accessToken = req.accessToken;
+  const { title, content } = req.body;
+  const result = await Post.editPosting(userId, req.params.id, title, content);
+  if (result === true) {
+    res.status(200).json({
+      res: "success",
+      accessToken: accessToken,
+    });
+  } else {
+    res.status(200).json({
+      res: "fail",
+      accessToken: "",
+    });
+  }
+});
+
 router.delete("/delete/:id", getUserIdByAcessToken, async (req, res) => {
   const userId = req.userId;
   const accessToken = req.accessToken;

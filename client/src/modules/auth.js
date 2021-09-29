@@ -27,6 +27,9 @@ const DO_WRITE_SUCCESS = 'auth/DO_WRITE_SUCCESS';
 const DO_DELETE_POST = 'auth/DO_DELETE_POST';
 const DO_DELETE_POST_SUCCESS = 'auth/DO_DELETE_POST_SUCCESS';
 
+const DO_EDIT_POST = 'auth/DO_EDIT_POST';
+const DO_EDIT_POST_SUCCESS = 'auth/DO_EDIT_POST_SUCCESS';
+
 export const changeInput = createAction(CHANGE_INPUT, ({ form, data }) => ({
   form,
   data,
@@ -81,6 +84,8 @@ export const doLogout = () => async (dispatch) => {
 export const doWrite = createRequestThunk(DO_WRITE, api.write);
 
 export const doDeletePost = createRequestThunk(DO_DELETE_POST, api.deletePost);
+
+export const doEditPost = createRequestThunk(DO_EDIT_POST, api.editPost);
 
 const initalState = {
   register: {
@@ -142,6 +147,11 @@ const auth = handleActions(
       res: res,
     }),
     [DO_DELETE_POST_SUCCESS]: (state, { payload: { res, accessToken } }) => ({
+      ...state,
+      accessToken: accessToken,
+      res: res,
+    }),
+    [DO_EDIT_POST_SUCCESS]: (state, { payload: { res, accessToken } }) => ({
       ...state,
       accessToken: accessToken,
       res: res,

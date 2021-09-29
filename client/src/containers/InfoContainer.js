@@ -43,7 +43,17 @@ const InfoContainer = ({
     }
   }, [res, history, doLogout, initalizePage, initializeForm, getMyPosts, id]);
 
-  return <Info myPosts={myPosts} doDeletePost={doDeletePost} />;
+  const doEditPost = (id) => {
+    history.push(`/edit/${id}`);
+  };
+
+  return (
+    <Info
+      myPosts={myPosts}
+      doDeletePost={doDeletePost}
+      doEditPost={doEditPost}
+    />
+  );
 };
 
 const mapStateToProps = ({ auth, page }) => ({

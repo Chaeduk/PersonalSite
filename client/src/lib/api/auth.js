@@ -21,6 +21,9 @@ export const getMyPosts = (id) => client.get(`/api/post/myposts/${id}`);
 
 export const deletePost = (id) => client.delete(`/api/post/delete/${id}`);
 
+export const editPost = ({ id, title, content }) =>
+  client.patch(`/api/post/edit/${id}`, { title, content });
+
 export const resetToken = () => {
   client.defaults.headers.common['Authorization'] = '';
 };
