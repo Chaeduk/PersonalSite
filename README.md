@@ -14,6 +14,8 @@ Chaeduk의 개인 사이트⚡️⚡️⚡️
 
 ## 아키텍처
 
+![image](./arch.png)
+
 ## 링크
 
 - http://chaeduk.o-r.kr/
