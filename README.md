@@ -1,5 +1,3 @@
-# PersonalSite
-
 ## 소개
 
 Chaeduk의 개인 사이트
