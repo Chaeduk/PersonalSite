@@ -1,5 +1,13 @@
 # PersonalSite
 
+## 소개
+
+Chaeduk의 개인 사이트
+
+## 기술스택
+
+## 아키텍처
+
 ## 링크
 
 - http://chaeduk.o-r.kr/
